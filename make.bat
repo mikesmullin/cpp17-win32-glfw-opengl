@@ -1,4 +1,4 @@
-@echo off
+@echo on
 REM run via Developer Command Prompt for VS 2019
 
 REM cd resources/
@@ -28,6 +28,4 @@ cd ..
 pause
 
 echo execute...
-cd build/
-main.exe
-cd ..
+build\main.exe
