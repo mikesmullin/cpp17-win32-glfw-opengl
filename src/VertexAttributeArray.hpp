@@ -8,7 +8,4 @@ private:
 public:
   VertexAttributeArray(const unsigned int id, const unsigned int size);
   ~VertexAttributeArray();
-
-  void Bind() const;
-  void Unbind() const;
 };

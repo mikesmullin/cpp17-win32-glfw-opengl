@@ -4,7 +4,7 @@
 VertexAttributeArray::VertexAttributeArray(const unsigned int id, const unsigned int size)
   : m_RendererId(id), m_Size(size)
 {
-    VertexAttributeArray::Bind();
+    GLCall(glEnableVertexAttribArray(m_RendererId));
 
     // current VAO state updates VAA + VBO here
     GLCall(glVertexAttribPointer(
@@ -14,19 +14,10 @@ VertexAttributeArray::VertexAttributeArray(const unsigned int id, const unsigned
       GL_FALSE,  // normalized
       sizeof(float) * m_Size, // stride
       0 // offset
-    ));    
+    ));
 }
 
 VertexAttributeArray::~VertexAttributeArray()
-{
-}
-
-void VertexAttributeArray::Bind() const
-{
-  GLCall(glEnableVertexAttribArray(m_RendererId));
-}
-
-void VertexAttributeArray::Unbind() const
 {
   GLCall(glDisableVertexAttribArray(m_RendererId));
 }
