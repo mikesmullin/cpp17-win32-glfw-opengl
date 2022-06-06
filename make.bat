@@ -27,6 +27,7 @@ cl /EHsc /std:c++17 /MD ^
   ../src/VertexBuffer.cpp ^
   ../src/VertexAttributeArray.cpp ^
   ../src/IndexBuffer.cpp ^
+  ../src/Shader.cpp ^
   /link user32.lib shell32.lib gdi32.lib opengl32.lib ^
   /LIBPATH:../vendor/glfw-3.3.7/lib-vc2019 glfw3.lib ^
   /LIBPATH:../vendor/glew-2.1.0/lib/Release/Win32 glew32s.lib 
