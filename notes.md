@@ -1,7 +1,6 @@
 # Mike's OpenGL Notes
 
 - `immediate mode` and `display lists` old/deprecated in favor of `VAO`s and `VBO`s
-- `OpenGL Compatibility Profile` is default unless you specify `Core Profile`
 - attributes are the individual items contained within a vertice
 - vertice is more than position/coordinates attributes; can include normals, texture UVs, and other data
 - vertex shader is called per-vertice in vertex buffer
@@ -9,6 +8,7 @@
 - a single gl function can return multiple errors; therefore you must call `glGetError()` until it returns empty, every time
 - `gl4/glDebugMessageCallback` is superior alternative to `glGetError()`
 - uniforms are set per draw call
+- `COMPAT_PROFILE` means recycling one default/global VAO for everything; this is the default profile for backward-compatibility. `CORE_PROFILE` means defining as many VAOs as you like. Changing VAOs is fewer-calls/optimal/easier/faster than otherwise changing the VAAs + VBOs many times per frame.
 
 ---
 ## VAOs & VBOs
@@ -19,15 +19,18 @@ graph TD
   vao([Vertex Array Object])
   vbo([Vertex Buffer Object])
   ib([Index Buffer])
-  va([Vertex Array])
-  v([Vertex])
-  a([Attribute])
+  vaa([Vertex Attribute Array])
+  %%vab(["[Vertex Array] Buffer"])
+  v(["Data; Vertices, Attributes; position, UVs, color, etc."])
+  %%a([Attribute])
+  %%l([Vertex Attrib Array / vertex layout / Buffer Layout Object / specification])
 
-  vao --> vbo
+  %%vao --> vbo
+  %%vaa --> vbo
+  %%vao --> vaa
 
-  l([layout / Buffer Layout Object / specification])
+  vaa -->|joins| vao & vbo
 
-  vao --> l
-
-  ib --> va --> v --> a
+  ib --> vbo --> v
+  %%v --> a
 ```
