@@ -42,8 +42,6 @@ int main(void)
     std::cout << "Error!" << std::endl;
   }
 
-  GLCall(std::cout << glGetString(GL_VERSION) << std::endl);
-
   {
     float positions[] = {
       -0.5f, -0.5f, // 0
@@ -56,6 +54,9 @@ int main(void)
       0, 1, 2,
       2, 3, 0
     };
+
+    Renderer renderer;
+    renderer.DebugLogVersion();
 
     VertexArray vao(1);
     VertexBuffer vbo(positions, 4 * 2 * sizeof(float));
@@ -73,15 +74,10 @@ int main(void)
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
-      /* Render here */
-      GLCall(glClear(GL_COLOR_BUFFER_BIT));
-
-      // draw
-      shader.Bind();
+      renderer.Clear();
+      renderer.Bind(vao, shader);
       shader.SetUniform4f(colorId, r, 0.3f, 0.8f, 1.0f);
-
-      vao.Bind();
-      GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
+      renderer.Draw();
 
       if (r > 1.0f)
       {
@@ -93,11 +89,10 @@ int main(void)
       }
       r += increment;
 
-
-      /* Swap front and back buffers */
+      // Swap front and back buffers
       glfwSwapBuffers(window);
 
-      /* Poll for and process events */
+      // Poll for and process events
       glfwPollEvents();
     }
   }
