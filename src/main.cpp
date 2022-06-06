@@ -8,10 +8,10 @@
 #include <string>
 #include <sstream>
 
-#include "Renderer.h"
+#include "Renderer.hpp"
 
-#include "VertexBuffer.h"
-#include "IndexBuffer.h"
+#include "VertexBuffer.hpp"
+#include "IndexBuffer.hpp"
 
 struct ShaderProgramSource
 {
