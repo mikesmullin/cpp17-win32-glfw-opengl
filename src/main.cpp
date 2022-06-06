@@ -62,7 +62,7 @@ int main(void)
     VertexAttributeArray vaa(0, 2);
     IndexBuffer ib(indices, 6);
     Shader shader("res/shaders/Basic.shader");
-    int color = shader.GetUniformId("u_Color");
+    int colorId = shader.GetUniformId("u_Color");
 
     // clear state
     shader.Unbind();
@@ -78,7 +78,7 @@ int main(void)
 
       // draw
       shader.Bind();
-      shader.SetUniform4f(color, r, 0.3f, 0.8f, 1.0f);
+      shader.SetUniform4f(colorId, r, 0.3f, 0.8f, 1.0f);
 
       vao.Bind();
       GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
