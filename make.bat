@@ -17,7 +17,7 @@ REM see https://docs.microsoft.com/en-us/cpp/build/reference/compiler-command-li
 REM see https://docs.microsoft.com/en-us/cpp/build/reference/d-preprocessor-definitions?view=msvc-170
 REM see https://docs.microsoft.com/en-us/cpp/build/reference/i-additional-include-directories?view=msvc-170
 REM see https://docs.microsoft.com/en-us/cpp/build/reference/libpath-additional-libpath?view=msvc-170
-cl ../main.cpp /std:c++17 /MD ^
+cl ../src/main.cpp /std:c++17 /MD ^
   /D GLEW_STATIC ^
   /I ../vendor/glfw-3.3.7/include ^
   /I ../vendor/glew-2.1.0/include ^
