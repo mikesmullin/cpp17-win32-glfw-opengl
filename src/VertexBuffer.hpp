@@ -1,6 +1,6 @@
 #pragma once
 
-class VertexBuffer
+class VertexBuffer // VBO
 {
 private:
   unsigned int m_RendererId;

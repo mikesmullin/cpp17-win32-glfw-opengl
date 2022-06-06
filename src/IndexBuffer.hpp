@@ -1,6 +1,6 @@
 #pragma once
 
-class IndexBuffer
+class IndexBuffer // IB
 {
 private:
   unsigned int m_RendererId;
