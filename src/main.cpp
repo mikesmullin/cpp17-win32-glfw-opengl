@@ -1,4 +1,3 @@
-#include <iostream>
 // see: http://glew.sourceforge.net/basic.html
 #include <GL/glew.h>
 // see: https://www.glfw.org/documentation.html
@@ -9,28 +8,10 @@
 #include <string>
 #include <sstream>
 
-static void GLClearError()
-{
-  while (glGetError() != GL_NO_ERROR);
-}
+#include "Renderer.h"
 
-#define ASSERT(x) if (!(x)) { \
-    std::cout << __FILE__ << ":" << __LINE__ << ": Assertion failed: " << #x << std::endl; \
-    __debugbreak(); \
-  }
-#define GLCall(x) GLClearError();\
-  x;\
-  ASSERT(GLLogCall())
-
-static bool GLLogCall()
-{
-  while (GLenum error = glGetError())
-  {
-    std::cout << "[OpenGL Error] (" << error << ")" << std::endl;
-    return false;
-  }
-  return true;
-}
+#include "VertexBuffer.h"
+#include "IndexBuffer.h"
 
 struct ShaderProgramSource
 {
@@ -161,18 +142,12 @@ int main(void)
   GLCall(glGenVertexArrays(1, &vao));
   GLCall(glBindVertexArray(vao));
 
-  unsigned int buffer;
-  GLCall(glGenBuffers(1, &buffer));
-  GLCall(glBindBuffer(GL_ARRAY_BUFFER, buffer));
-  GLCall(glBufferData(GL_ARRAY_BUFFER, 8 * sizeof(float), positions, GL_STATIC_DRAW));
+  VertexBuffer vb(positions, 4 * 2 * sizeof(float));
 
   GLCall(glEnableVertexAttribArray(0));
   GLCall(glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0)); // this VAA binds VAO + VBO
 
-  unsigned int ibo;
-  GLCall(glGenBuffers(1, &ibo));
-  GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo));
-  GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), indices, GL_STATIC_DRAW));
+  IndexBuffer ib(indices, 6);
 
   ShaderProgramSource source = ParseShader("res/shaders/Basic.shader");
   unsigned int shader = CreateShader(source.VertexSource, source.FragmentSource);

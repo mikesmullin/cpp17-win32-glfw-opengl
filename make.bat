@@ -17,10 +17,14 @@ REM see https://docs.microsoft.com/en-us/cpp/build/reference/compiler-command-li
 REM see https://docs.microsoft.com/en-us/cpp/build/reference/d-preprocessor-definitions?view=msvc-170
 REM see https://docs.microsoft.com/en-us/cpp/build/reference/i-additional-include-directories?view=msvc-170
 REM see https://docs.microsoft.com/en-us/cpp/build/reference/libpath-additional-libpath?view=msvc-170
-cl ../src/main.cpp /std:c++17 /MD ^
+cl /std:c++17 /MD ^
   /D GLEW_STATIC ^
   /I ../vendor/glfw-3.3.7/include ^
   /I ../vendor/glew-2.1.0/include ^
+  ../src/main.cpp ^
+  ../src/Renderer.cpp ^
+  ../src/VertexBuffer.cpp ^
+  ../src/IndexBuffer.cpp ^
   /link user32.lib shell32.lib gdi32.lib opengl32.lib ^
   /LIBPATH:../vendor/glfw-3.3.7/lib-vc2019 glfw3.lib ^
   /LIBPATH:../vendor/glew-2.1.0/lib/Release/Win32 glew32s.lib 
