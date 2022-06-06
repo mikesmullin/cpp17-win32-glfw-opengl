@@ -1,6 +1,11 @@
 {
   "files.associations": {
     "sstream": "cpp",
-    "xstring": "cpp"
+    "xstring": "cpp",
+    "iostream": "cpp",
+    "ostream": "cpp",
+    "initializer_list": "cpp",
+    "type_traits": "cpp",
+    "xutility": "cpp"
   }
 }

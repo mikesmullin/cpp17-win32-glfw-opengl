@@ -11,6 +11,7 @@
 #include "VertexAttributeArray.hpp"
 #include "IndexBuffer.hpp"
 #include "Shader.hpp"
+#include "Texture.hpp"
 
 int main(void)
 {
@@ -44,10 +45,10 @@ int main(void)
 
   {
     float positions[] = {
-      -0.5f, -0.5f, // 0
-        0.5f, -0.5f, // 1
-        0.5f,  0.5f, // 2
-      -0.5f,  0.5f  // 3
+      -0.5f, -0.5f, 0.0f, 0.0f, // 0
+       0.5f, -0.5f, 1.0f, 0.0f, // 1
+       0.5f,  0.5f, 1.0f, 1.0f, // 2
+      -0.5f,  0.5f, 0.0f, 1.0f  // 3
     };
 
     unsigned int indices[] = {
@@ -58,16 +59,24 @@ int main(void)
     Renderer renderer;
     renderer.DebugLogVersion();
 
+    GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
     VertexArray vao(1);
-    VertexBuffer vbo(positions, 4 * 2 * sizeof(float));
-    VertexAttributeArray vaa(0, 2);
+    VertexBuffer vbo(positions, 4 * 4);
+    VertexAttributeArray vaa;
+    vaa.AddAttr<float>(2, false, 4 * sizeof(float));
+    vaa.AddAttr<float>(2, false, 4 * sizeof(float));
     IndexBuffer ib(indices, 6);
     Shader shader("res/shaders/Basic.shader");
-    int colorId = shader.GetUniformId("u_Color");
+    shader.Bind();
+    // int colorId = shader.GetUniformId("u_Color");
+    int textureId = shader.GetUniformId("u_Texture");
+    Texture texture("res/textures/Image.png");
+    texture.Bind();
+    shader.SetUniform1i(textureId, 0);
 
     // clear state
-    shader.Unbind();
     vao.Unbind();
+    shader.Unbind();
 
     float r = 0.0f;
     float increment = 0.05f;
@@ -76,7 +85,9 @@ int main(void)
     {
       renderer.Clear();
       renderer.Bind(vao, shader);
-      shader.SetUniform4f(colorId, r, 0.3f, 0.8f, 1.0f);
+      shader.Bind();
+      // shader.SetUniform4f(colorId, r, 0.3f, 0.8f, 1.0f);
+      shader.SetUniform1i(textureId, 0);
       renderer.Draw();
 
       if (r > 1.0f)

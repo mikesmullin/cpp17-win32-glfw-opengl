@@ -106,3 +106,8 @@ void Shader::SetUniform4f(const int id, const float v0, const float v1, const fl
 {
     GLCall(glUniform4f(id, v0, v1, f2, f3));
 }
+
+void Shader::SetUniform1i(const int id, const int i0) const
+{
+    GLCall(glUniform1i(id, i0));
+}

@@ -10,7 +10,7 @@ REM cd ..
 
 cd build/
 echo clean...
-del main.obj main.exe
+del *.obj *.exe
 
 echo compile and link...
 REM see https://docs.microsoft.com/en-us/cpp/build/reference/compiler-command-line-syntax?view=msvc-170
@@ -19,6 +19,7 @@ REM see https://docs.microsoft.com/en-us/cpp/build/reference/i-additional-includ
 REM see https://docs.microsoft.com/en-us/cpp/build/reference/libpath-additional-libpath?view=msvc-170
 cl /EHsc /std:c++17 /MD ^
   /D GLEW_STATIC ^
+  /I ../ ^
   /I ../vendor/glfw-3.3.7/include ^
   /I ../vendor/glew-2.1.0/include ^
   ../src/main.cpp ^
@@ -28,6 +29,8 @@ cl /EHsc /std:c++17 /MD ^
   ../src/VertexAttributeArray.cpp ^
   ../src/IndexBuffer.cpp ^
   ../src/Shader.cpp ^
+  ../src/Texture.cpp ^
+  ../vendor/stb_image/stb_image.cpp ^
   /link user32.lib shell32.lib gdi32.lib opengl32.lib ^
   /LIBPATH:../vendor/glfw-3.3.7/lib-vc2019 glfw3.lib ^
   /LIBPATH:../vendor/glew-2.1.0/lib/Release/Win32 glew32s.lib 
