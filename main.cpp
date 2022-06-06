@@ -197,10 +197,7 @@ int main(void)
     // draw
     GLCall(glUseProgram(shader));
     GLCall(glUniform4f(location, r, 0.3f, 0.8f, 1.0f));
-
-    GLCall(glBindVertexArray(vao)); // vertex array
-    GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo)); // index buffer
-
+    GLCall(glBindVertexArray(vao));
     GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
 
     if (r > 1.0f)
