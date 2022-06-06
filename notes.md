@@ -13,24 +13,14 @@
 ---
 ## VAOs & VBOs
 
-
 ```mermaid
 graph TD
   vao([Vertex Array Object])
   vbo([Vertex Buffer Object])
   ib([Index Buffer])
   vaa([Vertex Attribute Array])
-  %%vab(["[Vertex Array] Buffer"])
   v(["Data; Vertices, Attributes; position, UVs, color, etc."])
-  %%a([Attribute])
-  %%l([Vertex Attrib Array / vertex layout / Buffer Layout Object / specification])
-
-  %%vao --> vbo
-  %%vaa --> vbo
-  %%vao --> vaa
 
   vaa -->|joins| vao & vbo
-
-  ib --> vbo --> v
-  %%v --> a
+  ib -->|refs| vbo -->|holds| v
 ```

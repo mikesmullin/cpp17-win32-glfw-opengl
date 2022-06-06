@@ -167,7 +167,7 @@ int main(void)
   GLCall(glBufferData(GL_ARRAY_BUFFER, 8 * sizeof(float), positions, GL_STATIC_DRAW));
 
   GLCall(glEnableVertexAttribArray(0));
-  GLCall(glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0));
+  GLCall(glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0)); // this VAA binds VAO + VBO
 
   unsigned int ibo;
   GLCall(glGenBuffers(1, &ibo));
