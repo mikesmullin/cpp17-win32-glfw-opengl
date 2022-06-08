@@ -59,7 +59,7 @@ int main(void)
     Renderer renderer;
     renderer.DebugLogVersion();
 
-    GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
+    //GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
     VertexArray vao(1);
     VertexBuffer vbo(positions, 4 * 4);
     VertexAttributeArray vaa;
